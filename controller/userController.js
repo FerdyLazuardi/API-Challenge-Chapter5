@@ -92,7 +92,7 @@ async function createUser(req, res) {
         const hashedPassword = bcrypt.hashSync(password, 10);
         
         // check existing name user 
-        const existingUser = await users.findOne({ username })
+        const existingUser = await users.findOne({ where: { username: req.body.username } })
         if (existingUser) {
             return res.status(400).json({
                 status: 'failed',
